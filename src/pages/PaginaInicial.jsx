@@ -1,7 +1,7 @@
 export const PaginaInicial = () => {
     return(
         <div>
-            Página inicial
+            <h1>Sistema de Consulta Ágil</h1>
         </div>
     )
 }

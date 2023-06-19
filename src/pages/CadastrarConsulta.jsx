@@ -3,17 +3,16 @@ import {useEffect, useState} from "react";
 import {SelecionarEspecialidade} from "../components/SelecionarEspecialidade.jsx";
 import dayjs from "dayjs";
 import {SelecionarData} from "../components/SelecionarData";
+import {Rodape} from "../components/Rodape.jsx";
 
 export const CadastrarConsulta = () => {
     const [exibirPacientes, setExibirPacientes] = useState([])
     const [especialidadeSelecionada, setEspecialidadeSelecionada] = useState([])
     const [dataHoraConsultaSelecionada, setDataHoraConsultaSelecionada] = useState('')
-    const [totalElementos, setTotalElementos] = useState(0)
     const [paginacao, setPaginacao] = useState(0)
 
     async function agendarConsulta(idPaciente) {
         let dataFormatada = dayjs(dataHoraConsultaSelecionada).format('DD-MM-YYYY HH:mm:ss')
-        console.log(dataFormatada)
         if (!dataHoraConsultaSelecionada || !especialidadeSelecionada) return alert("Os campos não pode estar vazios")
         const dadosConsulta = {
             especialidade: especialidadeSelecionada,
@@ -23,7 +22,6 @@ export const CadastrarConsulta = () => {
         await axios.post('http://localhost:8080/consulta/cadastrar-consulta', dadosConsulta)
             .then(response => {
                 alert("Consulta cadastrada com sucesso")
-                console.log(response)
             })
             .catch(error => {
                     console.log(error)
@@ -40,8 +38,6 @@ export const CadastrarConsulta = () => {
         axios.get(`http://localhost:8080/paciente/listar-pacientes?page=${paginacao}`)
             .then(response => {
                 setExibirPacientes(response.data.elementos)
-                setTotalElementos(response.data.totalElementos)
-                console.log(response.data.totalElementos)
             })
             .catch(error => {
                 console.error(error)
@@ -91,6 +87,7 @@ export const CadastrarConsulta = () => {
                     )
                 })}
             </div>
+            <Rodape/>
         </div>
     )
 }

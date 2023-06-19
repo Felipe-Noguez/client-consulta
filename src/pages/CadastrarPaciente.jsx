@@ -1,5 +1,6 @@
 import axios from "axios";
 import {useState} from "react";
+import {Rodape} from "../components/Rodape.jsx";
 
 export const CadastrarPaciente = () => {
     const [nome, setNome] = useState('')
@@ -12,7 +13,9 @@ export const CadastrarPaciente = () => {
         }
         axios.post('http://localhost:8080/paciente/cadastrar-paciente', dadosPaciente)
             .then(response => {
-                console.log(response)
+                setNome('')
+                setTelefone('')
+                alert("Paciente cadastrado com sucesso!")
             })
             .catch(error => {
                 console.log(error)
@@ -32,6 +35,7 @@ export const CadastrarPaciente = () => {
                        onChange={event => setTelefone(event.target.value)}/>
                 <button type="button" onClick={handleSubmit}>Cadastrar Paciente</button>
             </form>
+            <Rodape/>
         </div>
     )
 }
