@@ -15,6 +15,7 @@ export const Cabecalho = () => {
             <Link to="/">Página inicial</Link>
             <Link to="/cadastrar-paciente">Cadastrar Paciente</Link>
             <Link to="/cadastrar-consulta">Cadastrar Consulta</Link>
+            <Link to="/cancelar-consulta">Reagendar/Cancelar Consulta</Link>
         </header>
     )
 }
